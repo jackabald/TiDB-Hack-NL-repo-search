@@ -10,3 +10,50 @@ The Semantic Search Engine for Code Repositories is an AI-powered tool designed 
 - Contextual Understanding: Employs LLMs to understand the context and intent behind queries, making the search highly accurate and intuitive.  
 - Code Reuse Encouragement: Facilitates code reuse by making it easy to find existing solutions, reducing redundancy in development.  
 
+
+## Prerequisites
+Before you begin, ensure you have the following installed on your machine:
+
+- Python 3.8+
+- Git
+- Virtual Environment (Optional but recommended)
+
+You'll also need:
+
+- A TiDB Cloud account and a Serverless instance set up.
+- An OpenAI API Key for natural language processing.
+
+## Installation
+
+1. Clone the Repository
+
+Begin by cloning the repository to your local machine:
+
+`git clone https://github.com/jackabald/TiDB-Hack-NL-repo-search.git  
+cd TiDB-Hack-NL-repo-search`
+
+2. Set Up a Virtual Environment (Optional but Recommended)
+
+Create and activate a virtual environment to manage your dependencies:
+
+
+`python -m venv venv  
+source venv/bin/activate  # On Windows, use `venv\Scripts\activate``
+
+3. Install Dependencies
+
+Install the necessary Python packages:
+
+`pip install -r requirements.txt
+Configure Environment Variables`
+
+Create a .env file in the root directory to store your configuration details:
+
+`TIDB_HOST=<your-tidb-host>
+TIDB_PORT=<your-tidb-port>
+TIDB_USER=<your-tidb-username>
+TIDB_PASSWORD=<your-tidb-password>
+TIDB_DATABASE=<your-tidb-database>
+OPENAI_API_KEY=<your-openai-api-key>`
+
+Replace the placeholders with your actual TiDB credentials and OpenAI API key.
