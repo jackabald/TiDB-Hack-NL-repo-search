@@ -22,24 +22,20 @@ You'll also need:
    
 ## Installation  
 1. Clone the Repository  
-Begin by cloning the repository to your local machine:  
 ```bash
 git clone https://github.com/jackabald/TiDB-Hack-NL-repo-search.git  
 cd TiDB-Hack-NL-repo-search`
 ```
 2. Set Up a Virtual Environment (Optional but Recommended)  
-Create and activate a virtual environment to manage your dependencies:  
 ```bash
 python -m venv venv  
 source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
 ```
 3. Install Dependencies  
-Install the necessary Python packages:  
 ```bash
 pip install -r requirements.txt
 ```
 4. Configure Environment Variables  
-Create a .env file in the root directory to store your configuration details:  
 ```
 TIDB_HOST=<your-tidb-host>
 TIDB_PORT=<your-tidb-port>
