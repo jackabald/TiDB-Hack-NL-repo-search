@@ -1,6 +1,6 @@
 # Semantic Search Engine for Code Repositories  
 
-## Project Structure  
+## CONTRIBUTING
 ALL TEAMMATES: Please read this README and look at issues to get started. FORK THE REPOSITORY, CREATE A BRANCH, AND SEND A PULL REQUEST TO MAKE CHANGES.  
 Write your own issues! If you notice a bug or want to add a feature, write about the issue. ALL PULL REQUESTS SHOULD LINK TO ISSUES.  
 Please reach out for any help!  
