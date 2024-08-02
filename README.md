@@ -1,5 +1,10 @@
 # Semantic Search Engine for Code Repositories  
 
+## Project Structure  
+ALL TEAMMATES: PLEASE READ THIS README AND LOOK AT ISSUES TO GET STARTED. FORK THE REPOSITORY, CREATE A BRANCH TO MAKE CHANGES, AND SEND A PULL REQUEST.  
+ADDITIONALLY, WRITE YOUR OWN ISSUES! IF YOU NOTICE A BUG OR WANT TO ADD A FEATURE, WRITE AN ISSUE. ALL PULL REQUESTS SHOULD LINK TO ISSUES.  
+FEEL FREE TO REACH OUT FOR ANY QUESTIONS OR HELP.  
+
 ## Overview  
 The Semantic Search Engine for Code Repositories is an AI-powered tool designed to help developers find relevant code snippets, functions, or entire libraries based on natural language queries. By leveraging advanced NLP techniques, large language models (LLMs), and TiDB Serverless with Vector Search, this tool allows users to efficiently locate specific code patterns, structures, or algorithms within a codebase.
 
