@@ -47,6 +47,5 @@ TIDB_PORT=<your-tidb-port>
 TIDB_USER=<your-tidb-username>
 TIDB_PASSWORD=<your-tidb-password>
 TIDB_DATABASE=<your-tidb-database>
-OPENAI_API_KEY=<your-openai-api-key>`
 ```
 Replace the placeholders with your actual TiDB credentials and OpenAI API key.
