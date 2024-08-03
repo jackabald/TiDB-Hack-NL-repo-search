@@ -2,3 +2,4 @@ flask
 pymysql
 transformers
 torch
+python-dotenv
