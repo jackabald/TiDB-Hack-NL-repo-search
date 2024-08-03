@@ -1,5 +1,4 @@
 flask
-openai
 pymysql
 transformers
 torch
