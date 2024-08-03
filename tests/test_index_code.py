@@ -68,7 +68,7 @@ class TestDatabaseStorage(unittest.TestCase):
 
 class TestDirectoryIndexing(unittest.TestCase):
     @patch('src.index_code.extract_code_snippets')
-    @patch('src.index_code.generate_vectors')
+    @patch('src.index_code.create_vector_metadata')
     @patch('src.index_code.store_in_tidb')
     def test_index_code_directory(self, mock_store, mock_generate, mock_extract):
         # Mocking the behaviors

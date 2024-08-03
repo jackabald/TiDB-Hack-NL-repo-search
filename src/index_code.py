@@ -67,19 +67,20 @@ def generate_graphcodebert_vector(code_snippet):
         vector = outputs.last_hidden_state.mean(dim=1).squeeze().numpy()
     return vector
 
-def generate_vectors(code_snippets):
-    vectors = []
+# Create metadata for each code snippet including its vector
+def create_vector_metadata(code_snippets):
+    vector_metadata = []
     for snippet in code_snippets:
         vector = generate_graphcodebert_vector(snippet["code"])
-        vector.append({
+        vector_metadata.append({
             "name": snippet["name"],
             "type": snippet["type"],
-            "vector": vector.tolist(),
+            "vector": vector.tolist(),  # Ensure vector is a list, which is JSON-serializable
             "start_line": snippet["start_line"],
             "end_line": snippet["end_line"],
             "code": snippet["code"]
         })
-    return vectors
+    return vector_metadata
 
 # Store vectors and metadata in TiDB
 def store_in_tidb(file_path, vectors):
@@ -110,5 +111,5 @@ def index_code_directory(directory):
                 file_path = os.path.join(root, file)
                 print(f"Indexing {file_path}...")
                 snippets = extract_code_snippets(file_path)
-                vectors = generate_vectors(snippets)
+                vectors = create_vector_metadata(snippets)
                 store_in_tidb(file_path, vectors)
