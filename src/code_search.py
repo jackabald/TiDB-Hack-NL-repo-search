@@ -1,6 +1,35 @@
 import os
+import pymysql
+import numpy as np
+import json
+from sklearn.metrics.pairwise import cosine_similarity
+from dotenv import load_dotenv
+from transformers import AutoTokenizer, AutoModel
+import torch
 
-from index_code import extract_code_snippets
+# Load environment variables from .env file
+load_dotenv()
+
+# TiDB connection details
+TIDB_HOST = os.getenv("TIDB_HOST")
+TIDB_PORT = int(os.getenv("TIDB_PORT"))
+TIDB_USER = os.getenv("TIDB_USER")
+TIDB_PASSWORD = os.getenv("TIDB_PASSWORD")
+TIDB_DATABASE = os.getenv("TIDB_DATABASE")
+
+# Connect to TiDB with SSL/TLS
+connection = pymysql.connect(
+    host=TIDB_HOST,
+    port=TIDB_PORT,
+    user=TIDB_USER,
+    password=TIDB_PASSWORD,
+    database=TIDB_DATABASE,
+    ssl={'ssl': True}
+)
+
+# Load GraphCodeBERT model and tokenizer
+tokenizer = AutoTokenizer.from_pretrained("microsoft/graphcodebert-base")
+model = AutoModel.from_pretrained("microsoft/graphcodebert-base")
 
 # TODO use gen-ai if needed and sql query
 def search_code(codebase_path):
@@ -22,3 +51,11 @@ def search_code(codebase_path):
             }
             results.append(result)
     return results
+
+# Generate vector for query
+def generate_query_vector(query):
+    inputs = tokenizer(query, return_tensors="pt", padding=True, truncation=True)
+    with torch.no_grad():
+        outputs = model(**inputs)
+        vector = outputs.last_hidden_state.mean(dim=1).squeeze().numpy()
+    return vector
