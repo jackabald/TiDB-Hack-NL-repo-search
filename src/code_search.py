@@ -1,24 +1,62 @@
 import os
+import pymysql
+import numpy as np
+import json
+from sklearn.metrics.pairwise import cosine_similarity
+from dotenv import load_dotenv
+from transformers import AutoTokenizer, AutoModel
+import torch
 
-from index_code import extract_code_snippets
+# Load environment variables from .env file
+load_dotenv()
 
-# TODO use gen-ai if needed and sql query
-def search_code(codebase_path):
-    results = []
+# TiDB connection details
+TIDB_HOST = os.getenv("TIDB_HOST")
+TIDB_PORT = int(os.getenv("TIDB_PORT"))
+TIDB_USER = os.getenv("TIDB_USER")
+TIDB_PASSWORD = os.getenv("TIDB_PASSWORD")
+TIDB_DATABASE = os.getenv("TIDB_DATABASE")
+
+# Connect to TiDB with SSL/TLS
+connection = pymysql.connect(
+    host=TIDB_HOST,
+    port=TIDB_PORT,
+    user=TIDB_USER,
+    password=TIDB_PASSWORD,
+    database=TIDB_DATABASE,
+    ssl={'ssl': True} 
+)
+
+# Load model and tokenizer
+tokenizer = AutoTokenizer.from_pretrained("microsoft/graphcodebert-base")
+model = AutoModel.from_pretrained("microsoft/graphcodebert-base")
+
+# Generate a vector for a given query to the chat bot
+def generate_query_vector(query):
+    inputs = tokenizer(query, return_tensors="pt", padding=True, truncation=True)
+    with torch.no_grad():
+        outputs = model(**inputs)
+        vector = outputs.last_hidden_state.mean(dim=1).squeeze().numpy()
+    return vector
+
+# Retrieve code vectors and metadata from TiDB
+def retrieve_code_vectors():
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT file_path, function_name, type, start_line, end_line, code, vector FROM code_snippets")
+        results = cursor.fetchall()
     
-    # Iterate through all files in the codebase
-    for root, files in os.walk(codebase_path):
-        for file in files:
-            file_path = os.path.join(root, file)
-            
-            # Extract code snippets from the file
-            snippets = extract_code_snippets(file_path)
-            
-            # Add the file path and relevant information to the results
-            result = {
-                'file_path': file_path,
-                'snippet': snippets,
-                'explanation': 'This is a relevant code snippet for the query.'
-            }
-            results.append(result)
-    return results
+    # Convert results to a usable format
+    snippets = []
+    for result in results:
+        vector = json.loads(result[6])  # Convert JSON string back to list
+        snippets.append({
+            "file_path": result[0],
+            "function_name": result[1],
+            "type": result[2],
+            "start_line": result[3],
+            "end_line": result[4],
+            "code": result[5],
+            "vector": np.array(vector)  # Convert list to NumPy array
+        })
+    
+    return snippets
