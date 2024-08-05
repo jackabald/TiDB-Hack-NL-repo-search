@@ -3,3 +3,4 @@ pymysql
 transformers
 torch
 python-dotenv
+scikit-learn
