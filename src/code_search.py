@@ -40,7 +40,8 @@ def generate_query_vector(query):
     return vector
 
 # Search code snippets using TiDB's vector search capabilities
-def search_code_snippets(query_vector, top_k=5):
+def search_code_snippets(query, top_k=5):
+    query_vector = generate_query_vector(query)
     query_vector_json = json.dumps(query_vector.tolist())
 
     with connection.cursor() as cursor:

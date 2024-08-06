@@ -4,3 +4,5 @@ transformers
 torch
 python-dotenv
 scikit-learn
+numpy<2
+streamlit
