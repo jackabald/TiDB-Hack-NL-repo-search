@@ -22,8 +22,7 @@ Before you begin, ensure you have the following installed on your machine:
 - Git
 - Virtual Environment (Optional but recommended)  
 You'll also need:  
-- A TiDB Cloud account and a Serverless instance set up.
-- An OpenAI API Key for natural language processing.  
+- A TiDB Cloud account and a Serverless instance set up. 
    
 ## Installation  
 1. Clone the Repository  
