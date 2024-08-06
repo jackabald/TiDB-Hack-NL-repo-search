@@ -39,28 +39,6 @@ def generate_query_vector(query):
         vector = outputs.last_hidden_state.mean(dim=1).squeeze()
     return vector
 
-# Retrieve code vectors and metadata from TiDB
-def retrieve_code_vectors():
-    with connection.cursor() as cursor:
-        cursor.execute("SELECT file_path, function_name, type, start_line, end_line, code, vector FROM code_snippets")
-        results = cursor.fetchall()
-    
-    # Convert results to a usable format
-    snippets = []
-    for result in results:
-        vector = json.loads(result[6])  # Convert JSON string back to list
-        snippets.append({
-            "file_path": result[0],
-            "function_name": result[1],
-            "type": result[2],
-            "start_line": result[3],
-            "end_line": result[4],
-            "code": result[5],
-            "vector": np.array(vector)  # Convert list to NumPy array
-        })
-    
-    return snippets
-
 # Search code snippets using TiDB's vector search capabilities
 def search_code_snippets(query_vector, top_k=5):
     query_vector_json = json.dumps(query_vector.tolist())

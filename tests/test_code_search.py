@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import patch, MagicMock
 import json
 import numpy as np
-from src.code_search import generate_query_vector, retrieve_code_vectors, search_code_snippets
+from src.code_search import generate_query_vector, search_code_snippets
 
 # Mocking the environment for tests
 @patch("src.code_search.connection")
@@ -15,24 +15,6 @@ class TestCodeSearch(unittest.TestCase):
 
         # Assertions
         self.assertEqual(len(vector), 768) 
-
-    def test_retrieve_code_vectors(self, mock_connection):
-        # Mocking the database response
-        mock_cursor = MagicMock()
-        mock_connection.cursor.return_value.__enter__.return_value = mock_cursor
-
-        # Ensure fetchall returns the expected mock data
-        mock_cursor.fetchall.return_value = [
-            ("file_path.py", "foo", "FunctionDef", 1, 5, "def foo(): pass", json.dumps([0.1, 0.2, 0.3]))
-        ]
-
-        # Test the function
-        snippets = retrieve_code_vectors()
-
-        # Assertions
-        self.assertEqual(len(snippets), 1)
-        self.assertEqual(snippets[0]["function_name"], "foo")
-        self.assertEqual(snippets[0]["vector"].tolist(), [0.1, 0.2, 0.3])
 
     def test_search_code_snippets(self, mock_connection):
         # Mocking the database response for the search
