@@ -47,4 +47,4 @@ TIDB_USER=<your-tidb-username>
 TIDB_PASSWORD=<your-tidb-password>
 TIDB_DATABASE=<your-tidb-database>
 ```
-Replace the placeholders with your actual TiDB credentials and OpenAI API key.
+Replace the placeholders with your actual TiDB credentials.
