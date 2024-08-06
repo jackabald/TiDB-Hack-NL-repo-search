@@ -27,10 +27,10 @@ class TestCodeSearch(unittest.TestCase):
         ]
 
         # Mocking the query vector
-        query_vector = np.array([0.1, 0.2, 0.3])
+        query = "function that initializes a binary search tree"
 
         # Test the function
-        results = search_code_snippets(query_vector)
+        results = search_code_snippets(query)
 
         # Assertions
         self.assertEqual(len(results), 1)
