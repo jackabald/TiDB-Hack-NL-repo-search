@@ -34,6 +34,24 @@ connection = pymysql.connect(
 tokenizer = AutoTokenizer.from_pretrained("microsoft/graphcodebert-base")
 model = AutoModel.from_pretrained("microsoft/graphcodebert-base")
 
+# Create SQL table if it does not exist
+def create_table_if_not_exists():
+    with connection.cursor() as cursor:
+        cursor.execute("""
+        CREATE TABLE IF NOT EXISTS code_snippets (
+            id INT PRIMARY KEY AUTO_INCREMENT,
+            file_hash VARCHAR(32),
+            file_path VARCHAR(255),
+            function_name VARCHAR(255),
+            type VARCHAR(50),
+            start_line INT,
+            end_line INT,
+            code TEXT,
+            vector JSON
+        );
+        """)
+        connection.commit()
+
 # Extract code structures
 def extract_code_snippets(file_path):
     with open(file_path, "r") as file:
@@ -84,6 +102,7 @@ def create_vector_metadata(code_snippets):
 
 # Store vectors and metadata in TiDB
 def store_in_tidb(file_path, vectors):
+    create_table_if_not_exists()  # Ensure the table exists
     with connection.cursor() as cursor:
         for item in vectors:
             file_hash = hashlib.md5(file_path.encode()).hexdigest()

@@ -40,23 +40,32 @@ def generate_query_vector(query):
     return vector
 
 # Search code snippets using TiDB's vector search capabilities
-def search_code_snippets(query, top_k=5):
-    query_vector = generate_query_vector(query)
-    query_vector_json = json.dumps(query_vector.tolist())
+def search_code_snippets(query, top_k=1):
+    query_vector = generate_query_vector(query).numpy()
 
     with connection.cursor() as cursor:
         sql = """
-        SELECT file_path, function_name, type, start_line, end_line, code, vector, 
-               COSINE_SIMILARITY(vector, %s) AS similarity
+        SELECT file_path, function_name, type, start_line, end_line, code, vector
         FROM code_snippets
-        ORDER BY similarity DESC
-        LIMIT %s;
         """
-        cursor.execute(sql, (query_vector_json, top_k))
+        cursor.execute(sql)
         results = cursor.fetchall()
 
     snippets = []
+    vectors = []
+    
+    # Parse the results and calculate cosine similarity
     for result in results:
+        vector = np.array(json.loads(result[6]))  # Convert JSON string back to a NumPy array
+        vectors.append((result, vector))
+    
+    similarities = cosine_similarity([query_vector], [v[1] for v in vectors]).flatten()
+
+    # Sort by similarity and pick the top_k results
+    top_indices = np.argsort(similarities)[-top_k:][::-1]
+
+    for index in top_indices:
+        result = vectors[index][0]
         snippets.append({
             "file_path": result[0],
             "function_name": result[1],
@@ -64,7 +73,7 @@ def search_code_snippets(query, top_k=5):
             "start_line": result[3],
             "end_line": result[4],
             "code": result[5],
-            "similarity": result[6]
+            "similarity": similarities[index]
         })
 
     return snippets
