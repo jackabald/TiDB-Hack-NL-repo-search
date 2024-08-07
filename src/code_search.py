@@ -41,7 +41,7 @@ def generate_query_vector(query):
 
 # Search code snippets using TiDB's vector search capabilities
 def search_code_snippets(query, top_k=1):
-    query_vector = generate_query_vector(query).numpy()
+    query_vector = generate_query_vector(query).numpy().reshape(1, -1)  # Ensure query_vector is 2D
 
     with connection.cursor() as cursor:
         sql = """
@@ -53,27 +53,31 @@ def search_code_snippets(query, top_k=1):
 
     snippets = []
     vectors = []
-    
+
     # Parse the results and calculate cosine similarity
     for result in results:
-        vector = np.array(json.loads(result[6]))  # Convert JSON string back to a NumPy array
+        # Convert JSON string back to a NumPy array
+        vector = np.array(json.loads(result[6])).flatten()  # Ensure the vector is 1D
         vectors.append((result, vector))
-    
-    similarities = cosine_similarity([query_vector], [v[1] for v in vectors]).flatten()
 
-    # Sort by similarity and pick the top_k results
-    top_indices = np.argsort(similarities)[-top_k:][::-1]
+    if vectors:
+        # Create a 2D array with each vector being a row
+        vector_array = np.vstack([v[1] for v in vectors])  # Ensure a 2D array
+        similarities = cosine_similarity(query_vector, vector_array).flatten()
 
-    for index in top_indices:
-        result = vectors[index][0]
-        snippets.append({
-            "file_path": result[0],
-            "function_name": result[1],
-            "type": result[2],
-            "start_line": result[3],
-            "end_line": result[4],
-            "code": result[5],
-            "similarity": similarities[index]
-        })
+        # Sort by similarity and pick the top_k results
+        top_indices = np.argsort(similarities)[-top_k:][::-1]
+
+        for index in top_indices:
+            result = vectors[index][0]
+            snippets.append({
+                "file_path": result[0],
+                "function_name": result[1],
+                "type": result[2],
+                "start_line": result[3],
+                "end_line": result[4],
+                "code": result[5],
+                "similarity": similarities[index]
+            })
 
     return snippets
