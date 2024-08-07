@@ -31,7 +31,7 @@ connection = pymysql.connect(
 tokenizer = AutoTokenizer.from_pretrained("microsoft/graphcodebert-base")
 model = AutoModel.from_pretrained("microsoft/graphcodebert-base")
 
-# Function to generate a vector for a given query
+# Generate a vector for a given query to the chat bot
 def generate_query_vector(query):
     inputs = tokenizer(query, return_tensors="pt", padding=True, truncation=True)
     with torch.no_grad():
@@ -41,6 +41,7 @@ def generate_query_vector(query):
 
 # Function to search code snippets using TiDB's vector search capabilities
 def search_code_snippets(query, top_k=1):
+    # Convert JSON string back to a NumPy array
     query_vector = generate_query_vector(query).numpy().reshape(1, -1)  # Ensure query_vector is 2D
 
     with connection.cursor() as cursor:
