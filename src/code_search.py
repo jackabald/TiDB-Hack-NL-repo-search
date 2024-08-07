@@ -39,9 +39,8 @@ def generate_query_vector(query):
         vector = outputs.last_hidden_state.mean(dim=1).squeeze()
     return vector
 
-# Function to search code snippets using TiDB's vector search capabilities
+# Search code snippets using TiDB's vector search capabilities
 def search_code_snippets(query, top_k=1):
-    # Convert JSON string back to a NumPy array
     query_vector = generate_query_vector(query).numpy().reshape(1, -1)  # Ensure query_vector is 2D
 
     with connection.cursor() as cursor:
@@ -57,6 +56,7 @@ def search_code_snippets(query, top_k=1):
 
     # Parse the results and calculate cosine similarity
     for result in results:
+        # Convert JSON string back to a NumPy array
         vector = np.array(json.loads(result[6])).flatten()  # Ensure the vector is 1D
         vectors.append((result, vector))
 
