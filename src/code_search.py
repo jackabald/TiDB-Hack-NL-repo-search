@@ -4,8 +4,18 @@ import numpy as np
 import json
 from sklearn.metrics.pairwise import cosine_similarity
 from dotenv import load_dotenv
-from transformers import AutoTokenizer, AutoModel
+from transformers import LlamaTokenizer, LlamaModel
 import torch
+from llama_index.core import VectorStoreIndex, SimpleDirectoryReader, Settings
+from llama_index.embeddings.huggingface import HuggingFaceEmbedding
+from llama_index.llms.ollama import Ollama
+
+# bge-base embedding model
+Settings.embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-base-en-v1.5")
+
+# ollama
+Settings.llm = Ollama(model="llama3", request_timeout=360.0)
+
 
 # Load environment variables from .env file
 load_dotenv()
@@ -27,22 +37,20 @@ connection = pymysql.connect(
     ssl={'ssl': True} 
 )
 
-# Load model and tokenizer
-tokenizer = AutoTokenizer.from_pretrained("microsoft/graphcodebert-base")
-model = AutoModel.from_pretrained("microsoft/graphcodebert-base")
 
 # Generate a vector for a given query to the chat bot
 def generate_query_vector(query):
-    inputs = tokenizer(query, return_tensors="pt", padding=True, truncation=True)
-    with torch.no_grad():
-        outputs = model(**inputs)
-        vector = outputs.last_hidden_state.mean(dim=1).squeeze()
+    # Create an embedding instance
+    embed_model = Settings.embed_model
+    # Generate the vector for the text snippet
+    vector = embed_model.get_embedding(query)
     return vector
+
 
 # Search code snippets using TiDB's vector search capabilities
 def search_code_snippets(query, top_k=1):
     query_vector = generate_query_vector(query).numpy()
-
+    print (query_vector)
     with connection.cursor() as cursor:
         sql = """
         SELECT file_path, function_name, type, start_line, end_line, code, vector
@@ -77,3 +85,8 @@ def search_code_snippets(query, top_k=1):
         })
 
     return snippets
+
+async def response (index, query):
+    query_engine = index.as_query_engine()
+    response = query_engine.query(query)
+    return response
