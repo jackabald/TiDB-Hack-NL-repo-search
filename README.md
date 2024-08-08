@@ -1,9 +1,4 @@
-# Semantic Search Engine for Code Repositories  
-
-## CONTRIBUTING
-- ALL TEAMMATES: Please read this README and look at issues to get started. FORK THE REPOSITORY, CREATE A BRANCH, AND SEND A PULL REQUEST TO MAKE CHANGES.  
-- Write your own issues! If you notice a bug or want to add a feature, write about the issue. ALL PULL REQUESTS SHOULD LINK TO ISSUES.  
-- Please reach out for any help!  
+# Semantic Search Engine for Code Repositories   
 
 ## Overview  
 The Semantic Search Engine for Code Repositories is an AI-powered tool designed to help developers find relevant code snippets, functions, or entire libraries based on natural language queries. By leveraging advanced NLP techniques, large language models (LLMs), and TiDB Serverless with Vector Search, this tool allows users to efficiently locate specific code patterns, structures, or algorithms within a codebase.
@@ -41,10 +36,7 @@ pip install -r requirements.txt
 ```
 4. Configure Environment Variables  
 ```
-TIDB_HOST=<your-tidb-host>
-TIDB_PORT=<your-tidb-port>
-TIDB_USER=<your-tidb-username>
-TIDB_PASSWORD=<your-tidb-password>
-TIDB_DATABASE=<your-tidb-database>
+TIDB_URL="<your-tidb-PyMySQL"
+GITHUB_TOKEN="your-GitHub-token"
 ```
-Replace the placeholders with your actual TiDB credentials.
+Replace the placeholders with your actual TiDB and GitHub credentials.
