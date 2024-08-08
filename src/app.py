@@ -1,8 +1,7 @@
 import streamlit as st
 import asyncio
 import nest_asyncio
-from index_code import create_index
-from code_search import response
+from rag import create_index, response
 
 # Apply nest_asyncio to handle nested event loops
 nest_asyncio.apply()
