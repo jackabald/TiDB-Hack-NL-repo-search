@@ -36,7 +36,7 @@ pip install -r requirements.txt
 ```
 4. Configure Environment Variables  
 ```
-TIDB_URL="<your-tidb-PyMySQL"
-GITHUB_TOKEN="your-GitHub-token"
+TIDB_URL="<your-tidb-PyMySQL>"
+GITHUB_TOKEN="<your-GitHub-token>"
 ```
 Replace the placeholders with your actual TiDB and GitHub credentials.
