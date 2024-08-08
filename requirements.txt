@@ -8,3 +8,6 @@ numpy<2
 streamlit
 llama-index
 llama-index-vector-stores-tidbvector
+llama-index-readers-github
+llama-index-embeddings-huggingface
+llama-index-llms-ollama
