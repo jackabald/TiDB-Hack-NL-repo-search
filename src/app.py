@@ -25,9 +25,11 @@ async def handle_query(repo_url, query):
 
             st.info("Fetching and indexing repository from GitHub...")
             index = await create_index(owner, repo)
-
+            
+            if index:
+                st.info("Querying for results...")
             # Assuming 'response' is an async function
-            results = await response(index, query)
+            results = response(index, query)
             return results
 
         except Exception as e:
