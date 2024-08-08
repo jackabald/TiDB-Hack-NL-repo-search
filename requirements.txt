@@ -6,3 +6,5 @@ python-dotenv
 scikit-learn
 numpy<2
 streamlit
+llama-index
+llama-index-vector-stores-tidbvector

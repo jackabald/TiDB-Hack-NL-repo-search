@@ -1,43 +1,46 @@
 import streamlit as st
-import os
-import zipfile
-import tempfile
+import asyncio
+import nest_asyncio
+from index_code import create_index
+from code_search import response
 
-# Import the functions from the code_search.py and index_code.py files
-from index_code import index_code_directory
-from code_search import search_code_snippets
+# Apply nest_asyncio to handle nested event loops
+nest_asyncio.apply()
 
 # Set up the Streamlit app
-st.title("Project Folder Upload and Query Interface")
+st.title("GitHub Repository Query Interface")
 
-# File uploader for the project folder
-uploaded_file = st.file_uploader("Upload your project (zip format)", type="zip")
+# Input for the GitHub repository URL
+repo_url = st.text_input("Enter GitHub repository URL (e.g., https://github.com/owner/repo)")
 
 # Text box for the query
 query = st.text_input("Enter your query")
 
-# Button to submit the query
-if st.button("Submit Query"):
-    if uploaded_file is not None:
-        # Save the uploaded zip file to a temporary directory
-        with tempfile.TemporaryDirectory() as tmpdir:
-            zip_path = os.path.join(tmpdir, uploaded_file.name)
-            with open(zip_path, "wb") as f:
-                f.write(uploaded_file.getbuffer())
-            
-            # Extract the zip file
-            with zipfile.ZipFile(zip_path, "r") as zip_ref:
-                zip_ref.extractall(tmpdir)
-            
-            # Index the extracted folder
-            st.info("Indexing code files in the uploaded folder...")
-            index_code_directory(tmpdir)  # Calls your function to index the code directory
-            
-            st.success("Folder indexed successfully!")
-            
-            # Here you can proceed with querying or any other operation after indexing
-            results = search_code_snippets(query)
-            st.write(results)
+# Define an async function to handle the process
+async def handle_query(repo_url, query):
+    if repo_url:
+        try:
+            # Extract owner and repo name from the URL
+            owner, repo = repo_url.rstrip("/").split("/")[-2:]
 
+            st.info("Fetching and indexing repository from GitHub...")
+            index = await create_index(owner, repo)
+            
+            if index:
+                st.info("Querying for results...")
+            # Assuming 'response' is an async function
+            results = response(index, query)
+            return results
+
+        except Exception as e:
+            st.error(f"An error occurred: {str(e)}")
+            return None
     else:
-        st.error("Please upload a project folder and enter a query.")
+        st.error("Please enter a GitHub repository URL.")
+        return None
+
+# Run the async function using asyncio.run()
+if st.button("Submit Query"):
+    results = asyncio.run(handle_query(repo_url, query))
+    if results:
+        st.write(results)
