@@ -36,7 +36,8 @@ pip install -r requirements.txt
 ```
 4. Configure Environment Variables  
 ```
-TIDB_URL="<your-tidb-PyMySQL>"
-GITHUB_TOKEN="<your-GitHub-token>"
+TIDB_URL="<your-tidb-pymysql>"
+GITHUB_TOKEN="<your-github-token>"
+JINA_API_KEY="<your-jina-api-key>
 ```
 Replace the placeholders with your actual TiDB and GitHub credentials.
