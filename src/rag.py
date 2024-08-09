@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 from llama_index.core import StorageContext, VectorStoreIndex
-from llama_index.readers.github import GithubRepositoryReader, GithubClient
+from llama_index.readers.github import GithubRepositoryReader, GithubClient, GitHubRepositoryIssuesReader, GitHubIssuesClient
 from llama_index.vector_stores.tidbvector import TiDBVectorStore
 from llama_index.embeddings.jinaai import JinaEmbedding
 from llama_index.core import Settings
@@ -15,6 +15,8 @@ github_token = os.getenv("GITHUB_TOKEN")
 if not github_token:
     raise ValueError("GitHub token not found in environment variables.")
 github_client = GithubClient(github_token=github_token, verbose=False)
+github_issues_client = GitHubIssuesClient(github_token=github_token, verbose=False)
+
 
 # Initialize TiDB connection
 tidb_connection_url = os.getenv("TIDB_URL")
@@ -38,13 +40,25 @@ async def create_index(owner, repo):
             github_client=github_client,
             owner=owner,
             repo=repo,
-            use_parser=True,
+            use_parser=False,
+            verbose=False
+        )
+        # Initialize GitHub issues reader
+        issues_reader = GitHubRepositoryIssuesReader(
+            github_client=github_issues_client,
+            owner=owner,
+            repo=repo,
             verbose=True
         )
-        
         # Load documents from the GitHub repository
         documents = reader.load_data(branch="main")
-
+        # Load issues from the GitHub repository
+        issues = issues_reader.load_data(
+            state=GitHubRepositoryIssuesReader.IssueState.ALL,
+        )
+        # Combine the documents and issues
+        data = documents + issues
+        
         # Initialize TiDB vector store
         tidbvec = TiDBVectorStore(
             connection_string=tidb_connection_url,
@@ -57,11 +71,10 @@ async def create_index(owner, repo):
         # Initialize storage context and index
         storage_context = StorageContext.from_defaults(vector_store=tidbvec)
         index = VectorStoreIndex.from_documents(
-            documents, storage_context=storage_context, show_progress=True
+            data, storage_context=storage_context, show_progress=True
         )
         
         return index
-
     except Exception as e:
         print(f"An error occurred: {e}")
         return None
