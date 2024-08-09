@@ -48,7 +48,7 @@ async def create_index(owner, repo):
             github_client=github_issues_client,
             owner=owner,
             repo=repo,
-            verbose=True
+            verbose=False
         )
         # Load documents from the GitHub repository
         documents = reader.load_data(branch="main")
