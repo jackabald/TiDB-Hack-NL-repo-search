@@ -2,12 +2,17 @@ import streamlit as st
 import asyncio
 import nest_asyncio
 from rag import create_index, response
+from components.sidebar import side_info
+from components.utils import initialise_session_state, clear_chat_history, abort_chat
 
 # Apply nest_asyncio to handle nested event loops
 nest_asyncio.apply()
 
 # Set up the Streamlit app
-st.title("GitHub Repository Query Interface")
+st.title("🔍: GitHub Repository Query Interface")
+# st.set_page_config(page_title="GitPilot AI", page_icon="🌟")
+side_info()
+initialise_session_state()
 
 # Input for the GitHub repository URL
 repo_url = st.text_input("Enter GitHub repository URL (e.g., https://github.com/owner/repo)")
