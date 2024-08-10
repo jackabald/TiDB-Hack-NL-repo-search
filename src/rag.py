@@ -100,6 +100,8 @@ def create_index(owner, repo):
 # https://docs.pingcap.com/tidbcloud/vector-search-integrate-with-llamaindex
 # TODO: research metadata filters and possible use them if they make results better
 def response (index, query):
-    query_engine = index.as_query_engine()
+    query_engine = index.as_query_engine(
+    streaming=True,
+)
     response = query_engine.query(query)
     return response

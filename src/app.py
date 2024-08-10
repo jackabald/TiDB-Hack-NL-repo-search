@@ -25,7 +25,7 @@ def handle_repo(repo_url):
             owner, repo = repo_url.rstrip("/").split("/")[-2:]
 
             # Check if repository has changed
-            st.spinner("Wait! Fetching and indexing repository from GitHub...")
+            st.info("Wait! Fetching and indexing repository from GitHub...")
             index = create_index(owner, repo)
             if index:
                 st.session_state.index = index
