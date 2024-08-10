@@ -42,6 +42,6 @@ curl -fsSL https://ollama.com/install.sh | sh
 ```
 TIDB_URL="<your-tidb-pymysql>"
 GITHUB_TOKEN="<your-github-token>"
-JINA_API_KEY="<your-jina-api-key>
+JINA_API_KEY="<your-jina-api-key>"
 ```
 Replace the placeholders with your actual TiDB and GitHub credentials.
