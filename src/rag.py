@@ -60,7 +60,7 @@ def initialize():
 
     return github_client, tidb_connection_url
 
-async def create_index(owner, repo):
+def create_index(owner, repo):
     try:
         # Initialize GitHub repository reader
         github_client, tidb_connection_url = initialize()
