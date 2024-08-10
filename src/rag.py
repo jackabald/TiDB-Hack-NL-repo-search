@@ -51,6 +51,8 @@ def initialize():
     if "OLLAMA_SERVER_URL" in st.secrets:
         ollama_server_url = st.secrets["OLLAMA_SERVER_URL"]
         st.session_state.ollama_server_url = ollama_server_url
+    elif "ollama_server_url" in st.session_state:
+        ollama_server_url = st.session_state.ollama_server_url
     else:
         raise ValueError("Ollama server URL not found in secrets.")
 
