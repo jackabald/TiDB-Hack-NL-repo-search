@@ -34,11 +34,9 @@ source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
 ```bash
 pip install -r requirements.txt
 ```
-4. Insall Ollama
-```bash
-curl -fsSL https://ollama.com/install.sh | sh
-```
-5. Configure Environment Variables  
+4. Install and configure Ollama
+
+6. Configure Environment Variables  
 ```
 TIDB_URL="<your-tidb-pymysql>"
 GITHUB_TOKEN="<your-github-token>"
