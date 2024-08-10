@@ -1,39 +1,67 @@
-import os
-from dotenv import load_dotenv
 from llama_index.core import StorageContext, VectorStoreIndex
 from llama_index.readers.github import GithubRepositoryReader, GithubClient
 from llama_index.vector_stores.tidbvector import TiDBVectorStore
 from llama_index.embeddings.jinaai import JinaEmbedding
 from llama_index.core import Settings
 from llama_index.llms.ollama import Ollama
+import streamlit as st
 
-# Load environment variables from .env file
-load_dotenv()
+def initialize():
+    """
+    Initialize the configurations and clients using Streamlit secrets and session state.
 
-# Initialize GitHub client
-github_token = os.getenv("GITHUB_TOKEN")
-if not github_token:
-    raise ValueError("GitHub token not found in environment variables.")
-github_client = GithubClient(github_token=github_token, verbose=False)
+    This function sets up the GitHub client, TiDB connection, Jina embedding model, and LLM.
+    It handles the input of credentials and configurations from Streamlit's secrets or sidebar inputs.
+    """
+    # Initialize GitHub client
+    if "GITHUB_TOKEN" in st.secrets:
+        github_token = st.secrets["GITHUB_TOKEN"]
+    else:
+        raise ValueError("GitHub token not found in secrets.")
 
-# Initialize TiDB connection
-tidb_connection_url = os.getenv("TIDB_URL")
-if not tidb_connection_url:
-    raise ValueError("TiDB connection URL not found in environment variables.")
+    github_client = GithubClient(github_token=github_token, verbose=False)
 
-# Initialize Jina Embedding Model
-jinaai_api_key = os.getenv("JINA_API_KEY")
-Settings.embed_model = JinaEmbedding(
-    api_key=jinaai_api_key,
-    model="jina-embeddings-v2-base-en"
-)
+    # Initialize TiDB connection
+    if "TIDB_URL" in st.secrets:
+        tidb_connection_url = st.secrets["TIDB_URL"]
+    elif "tidb_url" in st.session_state:
+        tidb_connection_url = st.session_state.tidb_url
+    else:
+        st.warning('Please provide TiDB URL in the sidebar.', icon="⚠️")
+        st.stop()
 
-# initialize llm
-Settings.llm = Ollama(model="llama3", request_timeout=360.0)
+    # Initialize Jina Embedding Model
+    if "JINA_API_KEY" in st.secrets:
+        jinaai_api_key = st.secrets["JINA_API_KEY"]
+    elif "jina_api_key" in st.session_state:
+        jinaai_api_key = st.session_state.jina_api_key
+    else:
+        st.warning('Please provide Jina API key in the sidebar.', icon="⚠️")
+        st.stop()
+
+    Settings.embed_model = JinaEmbedding(
+        api_key=jinaai_api_key,
+        model="jina-embeddings-v2-base-en"
+    )
+
+    # Initialize LLM
+    if "llm" not in st.session_state:
+        st.session_state.llm = None
+
+    if "OLLAMA_SERVER_URL" in st.secrets:
+        ollama_server_url = st.secrets["OLLAMA_SERVER_URL"]
+        st.session_state.ollama_server_url = ollama_server_url
+    else:
+        raise ValueError("Ollama server URL not found in secrets.")
+
+    Settings.llm = Ollama(model="llama3", request_timeout=360.0)
+
+    return github_client, tidb_connection_url
 
 async def create_index(owner, repo):
     try:
         # Initialize GitHub repository reader
+        github_client, tidb_connection_url = initialize()
         reader = GithubRepositoryReader(
             github_client=github_client,
             owner=owner,
