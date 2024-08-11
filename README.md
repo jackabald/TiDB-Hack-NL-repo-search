@@ -11,7 +11,7 @@ The Semantic Search Engine for Code Repositories is an AI-powered tool designed 
 - Code Reuse Encouragement: Facilitates code reuse by making it easy to find existing solutions, reducing redundancy in development.  
 
 
-## Prerequisites  
+## Prerequisites 🛠️
 Before you begin, ensure you have the following installed on your machine:  
 - Python 3.8+
 - Git
@@ -19,7 +19,7 @@ Before you begin, ensure you have the following installed on your machine:
 You'll also need:  
 - A TiDB Cloud account and a Serverless instance set up. 
    
-## Installation  
+## Installation ⚙️
 1. Clone the Repository  
 ```bash
 git clone https://github.com/jackabald/TiDB-Hack-NL-repo-search.git  
@@ -34,12 +34,18 @@ source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
 ```bash
 pip install -r requirements.txt
 ```
-4. Install and configure Ollama
+4. Install, configure Ollama and connect to large language models via the Ollama server.
+- [Setup Ollama](./docs/OLLAMA.md)
 
-6. Configure Environment Variables  
+6. Set up your `secrets.toml` file under `.streamlit` directory and copy `example.secrets.toml` into `secrets.toml` and replace the keys
 ```
 TIDB_URL="<your-tidb-pymysql>"
 GITHUB_TOKEN="<your-github-token>"
 JINA_API_KEY="<your-jina-api-key>"
 ```
-Replace the placeholders with your actual TiDB and GitHub credentials.
+
+## Contributing 🤝
+Contributions to this project are welcome! If you find any issues or have suggestions for improvement, please open an issue or submit a pull request on the project's GitHub repository.
+
+## License 📝
+This project is licensed under the [Apache License](https://github.com/jackabald/TiDB-Hack-NL-repo-searchblob/main/LICENSE). Feel free to use, modify, and distribute the code as per the terms of the license.
