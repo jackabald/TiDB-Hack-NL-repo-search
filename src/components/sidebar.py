@@ -3,9 +3,8 @@ import streamlit as st
 def side_info():
     with st.sidebar:
         # Display logo and images
-        # st.logo("src/assets/gitrepo.png", icon_image="src/assets/title.png", link="https://github.com/jackabald/TiDB-Hack-NL-repo-search")
-        # st.image("src/assets/title.png")
-        st.image("src/assets/gitrepo_pilot.png")
+        # st.logo("assets/gitrepo.png", icon_image="assets/title.png", link="https://github.com/jackabald/TiDB-Hack-NL-repo-search")
+        st.image("assets/gitrepo_pilot.png")
 
         # Display an informational card
         card_html = """
