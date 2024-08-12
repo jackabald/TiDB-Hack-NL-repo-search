@@ -1,4 +1,37 @@
-# Semantic Search Engine for Code Repositories   
+<p align="center">
+<img src="https://raw.githubusercontent.com/jackabald/TiDB-Hack-NL-repo-search/main/src/assets/gitrepo_pilot.png" height="130" alt="GitRepoPilot" />
+</p>
+
+<p align="center" style="margin-bottom: 50px">
+<a href="https://github.com/jackabald/TiDB-Hack-NL-repo-search/issues">
+        <img src="https://img.shields.io/github/issues/jackabald/TiDB-Hack-NL-repo-search" alt="Issues"></a>
+    <a href="https://github.com/jackabald/TiDB-Hack-NL-repo-search/network/members" alt="Forks">
+        <img src="https://img.shields.io/github/forks/jackabald/TiDB-Hack-NL-repo-search" /></a>
+    <a href="https://github.com/jackabald/TiDB-Hack-NL-repo-search/stargazers" alt="Stars">
+        <img src="https://img.shields.io/github/stars/jackabald/TiDB-Hack-NL-repo-search" /></a>
+    <a href="https://github.com/jackabald/TiDB-Hack-NL-repo-search/graphs/contributors">
+        <img src="https://img.shields.io/github/contributors/jackabald/TiDB-Hack-NL-repo-search"
+            alt="Contributors"></a>
+    <a href="https://github.com/jackabald/TiDB-Hack-NL-repo-search/blob/main/LICENSE">
+        <img src="https://img.shields.io/github/license/jackabald/TiDB-Hack-NL-repo-search"
+        alt="License"></a>
+    <a href="https://docs.pingcap.com/tidbcloud/">
+        <img src="https://img.shields.io/badge/-TiDB%20Cloud-orange"
+            alt="TiDB Cloud"/></a>
+</p>
+
+# Table of contents
+
+<!--ts-->
+   * [Project Overview](#Overview)
+   * [Features](#Features)
+      * [App Architecture](#App-Architecture) :TODO
+   * [Prerequisites](#Prerequisites)
+   * [Project Setup](#Installation)
+   * [Contributing](#Contributing)
+   * [How to get started with TiDB Vectors](#How-to-get-started-with-TiDB Vectors) :TODO
+<!--te-->
+
 
 ## Overview  
 The Semantic Search Engine for Code Repositories is an AI-powered tool designed to help developers find relevant code snippets, functions, or entire libraries based on natural language queries. By leveraging advanced NLP techniques, large language models (LLMs), and TiDB Serverless with Vector Search, this tool allows users to efficiently locate specific code patterns, structures, or algorithms within a codebase.
