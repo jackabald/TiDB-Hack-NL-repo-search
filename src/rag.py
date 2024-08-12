@@ -16,8 +16,11 @@ def initialize():
     # Initialize GitHub client
     if "GITHUB_TOKEN" in st.secrets:
         github_token = st.secrets["GITHUB_TOKEN"]
+    elif "github_token" in st.session_state:
+        github_token = st.session_state.github_token
     else:
-        raise ValueError("GitHub token not found in secrets.")
+        st.warning('Please provide GitHub token in the sidebar.', icon="⚠️")
+        st.stop()
 
     github_client = GithubClient(github_token=github_token, verbose=False)
 
