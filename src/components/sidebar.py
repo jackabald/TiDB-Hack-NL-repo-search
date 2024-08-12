@@ -3,14 +3,14 @@ import streamlit as st
 def side_info():
     with st.sidebar:
         # Display logo and images
-        # st.logo("src/assets/ssk.png", icon_image="src/assets/title.png", link="https://github.com/")
+        # st.logo("src/assets/gitrepo.png", icon_image="src/assets/title.png", link="https://github.com/jackabald/TiDB-Hack-NL-repo-search")
         # st.image("src/assets/title.png")
-        # st.image("src/assets/logo.png")
+        st.image("src/assets/gitrepo_pilot.png")
 
         # Display an informational card
         card_html = """
         <div style="background-color: #0E1117; border: 2px solid #DE834D; border-radius: 10px; padding: 0px 8px; width: 100%; box-sizing: border-box; color: white; text-align: center; font-family: 'Arial', sans-serif; font-size: 14px; color: #FAFAFA;">
-            <p>🌟 Your GitPilot AI assistant! Just ask, and watch as it finds exactly what you need, like magic!</p>
+            <p>🌟 Your GitRepoPilot AI assistant! Just ask, and watch as it finds exactly what you need, like magic!</p>
         </div>
         """
         st.components.v1.html(card_html, height=100, scrolling=False)
@@ -65,5 +65,5 @@ def side_info():
 
         # Divider and link button
         st.markdown("---")
-        st.link_button("🔗 Source Code", "https://github.com/", use_container_width=True)
+        st.link_button("🔗 Source Code", "https://github.com/jackabald/TiDB-Hack-NL-repo-search", use_container_width=True)
 
