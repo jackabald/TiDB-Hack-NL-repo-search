@@ -44,7 +44,7 @@ def initialize():
 
     Settings.embed_model = JinaEmbedding(
         api_key=jinaai_api_key,
-        model="jina-embeddings-v2-base-en"
+        model="jina-embeddings-v2-base-code"
     )
 
     # Initialize LLM
