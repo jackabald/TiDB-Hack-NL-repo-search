@@ -70,7 +70,7 @@ def initialize():
     else:
         raise ValueError("Ollama server URL not found in secrets.")
 
-    Settings.llm = Ollama(model="llama3", request_timeout=360.0)
+    Settings.llm = Ollama(model="deepseek-coder", request_timeout=360.0)
 
     return github_client, tidb_connection_url
 
