@@ -2,7 +2,7 @@ import streamlit as st
 import nest_asyncio
 from rag import create_index, response
 from components.sidebar import side_info
-from components.utils import initialise_session_state
+from components.utils import initialize_session_state
 
 # Apply nest_asyncio to handle nested event loops
 nest_asyncio.apply()
@@ -11,7 +11,7 @@ nest_asyncio.apply()
 st.title("🔍: GitHub Repository Query Interface")
 # st.set_page_config(page_title="GitRepoPilot AI", page_icon="🌟")
 side_info()
-initialise_session_state()
+initialize_session_state()
 
 # Input for the GitHub repository URL
 repo_url = st.text_input("Enter GitHub repository URL (e.g., https://github.com/owner/repo)")

@@ -1,3 +1,6 @@
+# import os
+# from traceloop.sdk import Traceloop
+# import time
 from llama_index.core import StorageContext, VectorStoreIndex
 from llama_index.readers.github import GithubRepositoryReader, GithubClient
 from llama_index.vector_stores.tidbvector import TiDBVectorStore
@@ -5,6 +8,14 @@ from llama_index.embeddings.jinaai import JinaEmbedding
 from llama_index.core import Settings
 from llama_index.llms.ollama import Ollama
 import streamlit as st
+
+
+# # Initialize Traceloop
+# Traceloop.init(
+#     app_name="GitRepoPilot",
+#     disable_batch=True,
+#     api_key=st.secrets["TRACELOOP_API_KEY"]  # Set this in your environment variables
+# )
 
 def initialize():
     """
@@ -81,10 +92,10 @@ def create_index(owner, repo):
         # Initialize TiDB vector store
         tidbvec = TiDBVectorStore(
             connection_string=tidb_connection_url,
-            table_name="repo_" + repo,
+            table_name="temp_repo_{owner}_{repo}",
             distance_strategy="cosine",
             vector_dimension=768,
-            drop_existing_table=False,
+            drop_existing_table=True,
         )
         
         # Initialize storage context and index
@@ -104,7 +115,7 @@ def create_index(owner, repo):
 # TODO: research metadata filters and possible use them if they make results better
 def response (index, query):
     query_engine = index.as_query_engine(
-    streaming=True,
-)
+        streaming=True,
+    )
     response = query_engine.query(query)
     return response
