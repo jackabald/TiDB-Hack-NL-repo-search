@@ -69,6 +69,9 @@ pip install -r requirements.txt
 ```
 4. Install, configure Ollama and connect to large language models via the Ollama server.
 - [Setup Ollama](./docs/OLLAMA.md)
+```bash
+ollama pull deepseek-coder
+```
 
 6. Set up your `secrets.toml` file under `.streamlit` directory and copy `example.secrets.toml` into `secrets.toml` and replace the keys
 ```

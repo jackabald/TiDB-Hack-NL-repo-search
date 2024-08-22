@@ -13,3 +13,4 @@ llama-index-llms-ollama
 jina
 llama-index-embeddings-jinaai
 mysqlclient
+traceloop-sdk

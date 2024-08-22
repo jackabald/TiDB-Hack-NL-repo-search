@@ -14,7 +14,7 @@ def abort_chat(error_message: str):
     st.session_state.chat_aborted = True
     st.rerun()
 
-def initialise_session_state():
+def initialize_session_state():
     if "chat_aborted" not in st.session_state:
         st.session_state.chat_aborted = False
 
