@@ -1,16 +1,10 @@
-flask
 pymysql
-transformers
-torch
-python-dotenv
-scikit-learn
+nest_asyncio
 numpy<2
 streamlit
 llama-index
 llama-index-vector-stores-tidbvector
 llama-index-readers-github
 llama-index-llms-ollama
-jina
 llama-index-embeddings-jinaai
 mysqlclient
-traceloop-sdk
