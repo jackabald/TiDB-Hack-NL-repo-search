@@ -8,8 +8,8 @@ from components.utils import initialize_session_state
 nest_asyncio.apply()
 
 # Set up the Streamlit app
+st.set_page_config(page_title="Codebase AI", page_icon="🌟")
 st.title("🔍: GitHub Repository RAG")
-# st.set_page_config(page_title="Codebase AI", page_icon="🌟")
 side_info()
 initialize_session_state()
 
