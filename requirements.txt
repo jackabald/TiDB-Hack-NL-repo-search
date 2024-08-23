@@ -10,6 +10,5 @@ llama-index
 llama-index-vector-stores-tidbvector
 llama-index-readers-github
 llama-index-llms-ollama
-jina
 llama-index-embeddings-jinaai
 traceloop-sdk
