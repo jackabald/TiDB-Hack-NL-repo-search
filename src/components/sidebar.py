@@ -4,7 +4,7 @@ def side_info():
     with st.sidebar:
         # Display logo and images
         # st.logo("assets/codebaseai.png", icon_image="assets/title.png", link="https://github.com/jackabald/TiDB-Hack-NL-repo-search")
-        st.image("assets/codebaseai.png")
+        # st.image("assets/codebaseai.png")
 
         # Display an informational card
         card_html = """
