@@ -6,3 +6,4 @@ llama-index-vector-stores-tidbvector
 llama-index-readers-github
 llama-index-llms-ollama
 llama-index-embeddings-jinaai
+mysqlclient
