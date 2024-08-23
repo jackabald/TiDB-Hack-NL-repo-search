@@ -3,13 +3,13 @@ import streamlit as st
 def side_info():
     with st.sidebar:
         # Display logo and images
-        # st.logo("assets/gitrepo.png", icon_image="assets/title.png", link="https://github.com/jackabald/TiDB-Hack-NL-repo-search")
-        st.image("assets/gitrepo_pilot.png")
+        # st.logo("assets/codebaseai.png", icon_image="assets/title.png", link="https://github.com/jackabald/TiDB-Hack-NL-repo-search")
+        st.image("assets/codebaseai.png")
 
         # Display an informational card
         card_html = """
         <div style="background-color: #0E1117; border: 2px solid #DE834D; border-radius: 10px; padding: 0px 8px; width: 100%; box-sizing: border-box; color: white; text-align: center; font-family: 'Arial', sans-serif; font-size: 14px; color: #FAFAFA;">
-            <p>🌟 Your GitRepoPilot AI assistant! Just ask, and watch as it finds exactly what you need, like magic!</p>
+            <p>🌟 Your code base assistant! Just ask, and watch as it finds exactly what you need, like magic!</p>
         </div>
         """
         st.components.v1.html(card_html, height=100, scrolling=False)

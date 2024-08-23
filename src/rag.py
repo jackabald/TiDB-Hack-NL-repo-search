@@ -12,7 +12,7 @@ import streamlit as st
 
 # # Initialize Traceloop
 # Traceloop.init(
-#     app_name="GitRepoPilot",
+#     app_name="Codebase AI",
 #     disable_batch=True,
 #     api_key=st.secrets["TRACELOOP_API_KEY"]  # Set this in your environment variables
 # )

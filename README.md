@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://raw.githubusercontent.com/jackabald/TiDB-Hack-NL-repo-search/main/src/assets/gitrepo_pilot.png" height="130" alt="GitRepoPilot" />
+<img src="https://raw.githubusercontent.com/jackabald/TiDB-Hack-NL-repo-search/main/src/assets/codebaseai.png" height="130" alt="Codebase AI" />
 </p>
 
 <p align="center" style="margin-bottom: 50px">
