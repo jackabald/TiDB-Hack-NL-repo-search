@@ -7,12 +7,12 @@ http://localhost:11434
 ## 📦 Pull a Model
 Explore the various models available in the Ollama library: [Ollama Library](https://ollama.com/library?sort=popular). To run a model, use the following command:
 ```
-ollama run llama3
+ollama run deepseek-coder
 ```
 
 Recommended Models:
 - deepseek-coder
-- Llama3
+- llama3
 
 ## 🌐 Serve Ollama Using Ngrok
 
