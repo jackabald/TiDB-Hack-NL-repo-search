@@ -1,6 +1,3 @@
-# import os
-# from traceloop.sdk import Traceloop
-# import time
 from llama_index.core import StorageContext, VectorStoreIndex
 from llama_index.readers.github import GithubRepositoryReader, GithubClient
 from llama_index.vector_stores.tidbvector import TiDBVectorStore
@@ -9,13 +6,6 @@ from llama_index.core import Settings
 from llama_index.llms.ollama import Ollama
 import streamlit as st
 
-
-# # Initialize Traceloop
-# Traceloop.init(
-#     app_name="Codebase AI",
-#     disable_batch=True,
-#     api_key=st.secrets["TRACELOOP_API_KEY"]  # Set this in your environment variables
-# )
 
 def initialize():
     """
@@ -115,7 +105,6 @@ def create_index(owner, repo):
 
 
 # https://docs.pingcap.com/tidbcloud/vector-search-integrate-with-llamaindex
-# TODO: research metadata filters and possible use them if they make results better
 def response (query_engine, query):
     response = query_engine.query(query)
     return response
