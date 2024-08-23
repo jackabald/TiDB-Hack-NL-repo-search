@@ -23,14 +23,14 @@
 # Table of contents
 
 <!--ts-->
-   * [Project Overview](#Overview)
-   * [Features](#Features)
-      * [App Architecture](#App-Architecture) :TODO
-   * [Prerequisites](#Prerequisites)
-   * [Project Setup](#Installation)
-   * [Contributing](#Contributing)
-   * [How to get started with TiDB Vectors](#How-to-get-started-with-TiDB Vectors) :TODO
-<!--te-->
+   * [Project Overview](#overview)
+   * [Features](#features)
+      * [App Architecture](#app-architecture)
+   * [Prerequisites](#prerequisites-️)
+   * [Project Setup](#installation-️)
+   * [Contributing](#contributing-)
+   * [How to get started with TiDB Vectors](#getting-started-with-tidb-vectors)
+<!--ts-->
 
 
 ## Overview  
@@ -41,7 +41,11 @@ The Semantic Search Engine for Code Repositories is an AI-powered tool designed 
 - Vector Search: Utilizes TiDB Serverless's Vector Search capabilities to identify and retrieve semantically similar code snippets.  
 - File and Line Number Retrieval: Provides the exact file path and line number where the relevant code appears, along with a code snippet for context.  
 - Contextual Understanding: Employs LLMs to understand the context and intent behind queries, making the search highly accurate and intuitive.  
-- Code Reuse Encouragement: Facilitates code reuse by making it easy to find existing solutions, reducing redundancy in development.  
+- Code Reuse Encouragement: Facilitates code reuse by making it easy to find existing solutions, reducing redundancy in development.
+
+### App-Architecture
+
+![app architect](/src/assets/arch.png)
 
 
 ## Prerequisites 🛠️
@@ -82,6 +86,9 @@ JINA_API_KEY="<your-jina-api-key>"
 
 ## Contributing 🤝
 Contributions to this project are welcome! If you find any issues or have suggestions for improvement, please open an issue or submit a pull request on the project's GitHub repository.
+
+## Getting-started-with-TiDB-Vectors
+Are you looking for implementing TiDB vectors in your application? Curious about getting started. You can definitely jump into the official docs [here](https://docs.pingcap.com/tidbcloud/vector-search-overview).
 
 ## License 📝
 This project is licensed under the [Apache License](https://github.com/jackabald/TiDB-Hack-NL-repo-searchblob/main/LICENSE). Feel free to use, modify, and distribute the code as per the terms of the license.
