@@ -1,9 +1,4 @@
-flask
 pymysql
-transformers
-torch
-python-dotenv
-scikit-learn
 numpy<2
 streamlit
 llama-index
@@ -11,4 +6,3 @@ llama-index-vector-stores-tidbvector
 llama-index-readers-github
 llama-index-llms-ollama
 llama-index-embeddings-jinaai
-traceloop-sdk
