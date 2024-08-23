@@ -103,8 +103,11 @@ def create_index(owner, repo):
         index = VectorStoreIndex.from_documents(
             documents, storage_context=storage_context, show_progress=True
         )
+        query_engine = index.as_query_engine(
+        streaming=True,
+        )
         
-        return index
+        return query_engine
 
     except Exception as e:
         print(f"An error occurred: {e}")
@@ -113,9 +116,6 @@ def create_index(owner, repo):
 
 # https://docs.pingcap.com/tidbcloud/vector-search-integrate-with-llamaindex
 # TODO: research metadata filters and possible use them if they make results better
-def response (index, query):
-    query_engine = index.as_query_engine(
-        streaming=True,
-    )
+def response (query_engine, query):
     response = query_engine.query(query)
     return response

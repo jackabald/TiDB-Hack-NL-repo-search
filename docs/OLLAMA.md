@@ -28,7 +28,7 @@ ngrok http 11434 --host-header="localhost:11434"
 This command will provide you with a public URL to access your Ollama instance.
 
 ## 🎉 Try It Out
-Access the Git Pilot interface at: [CodebaseAI](https://TODO.streamlit.app/).
+Access the Codebase AI interface at: [CodebaseAI](https://TODO.streamlit.app/).
 - Add the Ngrok URL in the sidebar.
 - Enjoy exploring the capabilities of Ollama!
 

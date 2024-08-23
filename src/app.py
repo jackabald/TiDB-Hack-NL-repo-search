@@ -25,9 +25,9 @@ def handle_repo(repo_url):
 
             # Check if repository has changed
             st.info("Wait! Fetching and indexing repository from GitHub...")
-            index = create_index(owner, repo)
-            if index:
-                st.session_state.index = index
+            query_engine = create_index(owner, repo)
+            if query_engine:
+                st.session_state.query_engine = query_engine
                 st.session_state.repo_name = repo
                 st.success("Repository indexed successfully.")
                 st.info("You can now start querying the repository.")
@@ -39,18 +39,18 @@ def handle_repo(repo_url):
         st.error("Please enter a GitHub repository URL.")
 
 # Ensure the repository is handled only once
-if 'index' not in st.session_state:
+if 'query_engine' not in st.session_state:
     handle_repo(repo_url)
 
 # Function to process user queries
 def process_query(query):
-    if st.session_state.index is None:
+    if st.session_state.query_engine is None:
         st.error("Repository not indexed yet. Please enter a valid GitHub repository URL.")
         return None
 
     try:
         st.info("Querying for results...")
-        results = response(st.session_state.index, query)
+        results = response(st.session_state.query_engine, query)
         return results
     except Exception as e:
         st.error(f"An error occurred while querying: {str(e)}")
