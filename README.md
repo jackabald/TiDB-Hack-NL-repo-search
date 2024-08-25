@@ -43,6 +43,9 @@ The Semantic Search Engine for Code Repositories is an AI-powered tool designed 
 - Contextual Understanding: Employs LLMs to understand the context and intent behind queries, making the search highly accurate and intuitive.  
 - Code Reuse Encouragement: Facilitates code reuse by making it easy to find existing solutions, reducing redundancy in development.
 
+
+[![](https://markdown-videos-api.jorgenkh.no/youtube/{video_id})](https://www.youtube.com/watch?v=qq9OzFuxXnM)
+
 ### App-Architecture
 
 ![app architect](/src/assets/arch.png)
