@@ -36,6 +36,8 @@
 ## Overview  
 The Semantic Search Engine for Code Repositories is an AI-powered tool designed to help developers find relevant code snippets, functions, or entire libraries based on natural language queries. By leveraging advanced NLP techniques, large language models (LLMs), and TiDB Serverless with Vector Search, this tool allows users to efficiently locate specific code patterns, structures, or algorithms within a codebase.
 
+[Watch our demo on YouTube](https://www.youtube.com/watch?v=qq9OzFuxXnM)
+
 ## Features
 - Natural Language Querying: Search for code using plain English queries like "find the piece of code that initializes the BST" or "locate the function that performs quicksort."  
 - Vector Search: Utilizes TiDB Serverless's Vector Search capabilities to identify and retrieve semantically similar code snippets.  
@@ -43,8 +45,6 @@ The Semantic Search Engine for Code Repositories is an AI-powered tool designed 
 - Contextual Understanding: Employs LLMs to understand the context and intent behind queries, making the search highly accurate and intuitive.  
 - Code Reuse Encouragement: Facilitates code reuse by making it easy to find existing solutions, reducing redundancy in development.
 
-
-[![](https://markdown-videos-api.jorgenkh.no/youtube/{video_id})](https://www.youtube.com/watch?v=qq9OzFuxXnM)
 
 ### App-Architecture
 
